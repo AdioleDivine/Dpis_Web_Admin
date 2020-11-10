@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
       );
 
   adminView(context) => AnimatedContainer(
-        color: Colors.white,
+        color: Colors.transparent,
         height: ResponsiveWidget.isSmallScreen(context)
             ? MediaQuery.of(context).size.height * 0.60
             : MediaQuery.of(context).size.width * 0.30,
@@ -36,6 +36,10 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text("ADMIN LOGIN"),
             ),
+            SizedBox(height: 40),
+            TextField(),
+            TextField(),
+            FlatButton(onPressed: () {}, child: null)
           ],
         ),
         duration: Duration(milliseconds: 30),
@@ -45,24 +49,39 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[900],
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Align(
-                alignment: Alignment.topCenter,
-                child: Column(children: [
-                  profileImage(context),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 10,
-                  ),
-                  adminView(context),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 10,
-                  ),
-                ]))
-          ],
-        ),
+        child: Stack(children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 150.0),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Image.network(
+                  "https://res.cloudinary.com/divineadiole/image/upload/v1604939899/logodp_lynxck.png"),
+            ),
+          ),
+          Opacity(
+            opacity: 0.9,
+            child: Container(
+              color: Colors.deepPurple[900],
+              child: Column(
+                children: [
+                  Align(
+                      alignment: Alignment.topCenter,
+                      child: Column(children: [
+                        profileImage(context),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 10,
+                        ),
+                        adminView(context),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 10,
+                        ),
+                      ]))
+                ],
+              ),
+            ),
+          )
+        ]),
       ),
     );
   }
